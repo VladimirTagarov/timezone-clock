@@ -3,12 +3,9 @@ import { useSelector } from "react-redux";
 
 const SelectTime = ({ city, setCity }) => {
   const cities = useSelector((state) => state.timezones.cities);
-  //   const citiesArr = cities.map((city) => city.city);
-
   const handleCities = (event) => {
     setCity(event.target.value);
   };
-  //   console.log("cities: ", citiesArr);
   return (
     <>
       <select onChange={handleCities}>

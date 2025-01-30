@@ -1,11 +1,31 @@
+body {
+  background-color: #282c34;
+}
+
 .App {
   text-align: center;
   background-color: #282c34;
 }
 
-.App-logo {
-  height: 40vmin;
+.clock-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  flex-wrap: wrap;
+}
+
+.App-text {
+  height: 10vmin;
   pointer-events: none;
+  color: #c7c9ce;
+}
+
+.App-small-text {
+  height: 3vmin;
+  pointer-events: none;
+  color: #c7c9ce;
+  margin-bottom: 15px;
 }
 
 .App-clock {
@@ -28,6 +48,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 240px;
+  width: 240px;
 }
 
 .arrow {

@@ -6,9 +6,9 @@ const Header = ({ quantity, setQuantity }) => {
   };
   return (
     <div>
-      <h1>Тестовое задание</h1>
+      <h1 className="App-text">Тестовое задание</h1>
+      <h3 className="App-small-text">Выберите необходимое количество часов</h3>
       <select onChange={handleSelect} value={quantity}>
-        <option>Выберите количество часов</option>
         <option value={1}>1</option>
         <option value={2}>2</option>
         <option value={3}>3</option>
@@ -20,12 +20,6 @@ const Header = ({ quantity, setQuantity }) => {
         <option value={9}>9</option>
         <option value={10}>10</option>
       </select>
-      {/* <select name="" id="">
-        <option>Выберите количество часов</option>
-        {currentQuantitys.map((currentQuantity) => (
-          <option>{currentQuantity}</option>
-        ))}
-      </select> */}
     </div>
   );
 };
