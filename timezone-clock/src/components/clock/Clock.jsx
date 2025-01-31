@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-const Clock = ({ city, setCity }) => {
+const Clock = ({ city, setCity, isLoading, setIsLoading }) => {
   const [time, setTime] = useState();
   const currentTime = new Date();
   const cities = useSelector((state) => state.timezones.cities);
@@ -11,7 +11,7 @@ const Clock = ({ city, setCity }) => {
     if (resultOffset) {
       setCityOffset(resultOffset.offset);
     }
-  }, [city, resultOffset]);
+  }, [resultOffset, city]);
   const getCurrentTime = () => {
     const date = new Date();
     const utc = date.getTime() + date.getTimezoneOffset() * 60000;
@@ -22,7 +22,7 @@ const Clock = ({ city, setCity }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(getCurrentTime());
-    }, 1000);
+    }, 100);
     return () => clearInterval(interval);
   }, [cityOffset]);
 
@@ -33,12 +33,14 @@ const Clock = ({ city, setCity }) => {
   function timeStringToDate(timeString) {
     if (typeof timeString === "string") {
       const [hours, minutes, seconds] = timeString.split(":").map(Number);
-      const date = new Date(); // Создаем объект Date с текущей датой
-      date.setHours(hours, minutes, seconds); // Устанавливаем часы, минуты и секунды
+      const date = new Date();
+      date.setHours(hours, minutes, seconds);
       return date;
     }
     return null;
   }
+
+  // Создаем элементы seconds, minutes, hour и задаем им градус наклона в соответствии со временем для имитации движения стрелок
 
   const seconds =
     timeStringToDate(time) instanceof Date
@@ -59,42 +61,44 @@ const Clock = ({ city, setCity }) => {
 
   return (
     <div>
-      <div className="App-clock-container">
-        <div className="App-clock">
-          <div
-            className="arrow hour"
-            style={{ transform: `rotate(${hourDeg}deg)` }}
-          ></div>
-          <div
-            className="arrow minute"
-            style={{ transform: `rotate(${minuteDeg}deg)` }}
-          ></div>
-          <div
-            className="arrow second"
-            style={{ transform: `rotate(${secondDeg}deg)` }}
-          ></div>
-          <div className="streak streak_1"></div>
-          <div className="streak streak_2"></div>
-          <div className="streak streak_3"></div>
-          <div className="streak streak_4"></div>
-          <div className="streak streak_5"></div>
-          <div className="streak streak_6"></div>
-          <div className="streak streak_7"></div>
-          <div className="streak streak_8"></div>
-          <div className="streak streak_9"></div>
-          <div className="streak streak_10"></div>
-          <div className="streak streak_11"></div>
-          <div className="streak streak_12"></div>
+      <div>
+        <div className="App-clock-container">
+          <div className="App-clock">
+            <div
+              className="arrow hour"
+              style={{ transform: `rotate(${hourDeg}deg)` }}
+            ></div>
+            <div
+              className="arrow minute"
+              style={{ transform: `rotate(${minuteDeg}deg)` }}
+            ></div>
+            <div
+              className="arrow second"
+              style={{ transform: `rotate(${secondDeg}deg)` }}
+            ></div>
+            <div className="streak streak_1"></div>
+            <div className="streak streak_2"></div>
+            <div className="streak streak_3"></div>
+            <div className="streak streak_4"></div>
+            <div className="streak streak_5"></div>
+            <div className="streak streak_6"></div>
+            <div className="streak streak_7"></div>
+            <div className="streak streak_8"></div>
+            <div className="streak streak_9"></div>
+            <div className="streak streak_10"></div>
+            <div className="streak streak_11"></div>
+            <div className="streak streak_12"></div>
+          </div>
         </div>
+        <div className="App-small-text">{time}</div>
+        <select onChange={handleCities}>
+          {cities.map((cityObj, index) => (
+            <option key={index} value={cityObj.city}>
+              {cityObj.city}
+            </option>
+          ))}
+        </select>
       </div>
-      <div className="App-small-text">{time}</div>
-      <select onChange={handleCities}>
-        {cities.map((cityObj, index) => (
-          <option key={index} value={cityObj.city}>
-            {cityObj.city}
-          </option>
-        ))}
-      </select>
     </div>
   );
 };

@@ -8,7 +8,7 @@ const Header = ({ quantity, setQuantity }) => {
     <div>
       <h1 className="App-text">Тестовое задание</h1>
       <h3 className="App-small-text">Выберите необходимое количество часов</h3>
-      <select onChange={handleSelect} value={quantity}>
+      <select className="App-select" onChange={handleSelect} value={quantity}>
         <option value={1}>1</option>
         <option value={2}>2</option>
         <option value={3}>3</option>
